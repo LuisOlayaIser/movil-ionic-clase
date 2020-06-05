@@ -1,23 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../services/api.service';
+import { ApiService } from '../../services/api.service';
 import { AlertController, ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { UpdatePage } from '../estudiante/update/update.page';
-
+import { UpdatePage } from '../../estudiante/update/update.page';
+import { CreatePage } from '../create/create.page';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-list',
+  templateUrl: './list.page.html',
+  styleUrls: ['./list.page.scss'],
 })
-export class HomePage implements OnInit{
+export class ListPage implements OnInit {
 
   public estudiantes:any[] =[];
 
   constructor(
     private api:ApiService, 
     private alert:AlertController,
-    private router: Router,
     private modal:ModalController
     ) {}
 
@@ -55,7 +54,9 @@ export class HomePage implements OnInit{
   }
 
   create(){
-    this.router.navigate(["create"]);
+    this.modal.create({
+      component: CreatePage,
+    }).then(modal => modal.present());
   }
 
   update(id){

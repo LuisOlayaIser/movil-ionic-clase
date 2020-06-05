@@ -1,0 +1,38 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Actualizar Materia </ion-title>
+        <ion-button (click)="closeModal()" slot="end">Cerrar</ion-button>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <form #formulario="ngForm" (ngSubmit)="send()">
+        <ion-list>
+            <ion-item>
+                <ion-label position="floating">Nombre</ion-label>
+                <ion-input [(ngModel)]="data.nombre" name="nombre" type="text" required></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="floating">Creditos</ion-label>
+                <ion-input [(ngModel)]="data.creditos" name="creditos" type="tel" required></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="floating">Horas</ion-label>
+                <ion-input [(ngModel)]="data.horas" name="horas" type="tel" required></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="floating">Descripcion</ion-label>
+                <ion-textarea [(ngModel)]="data.descripcion" name="descripcion" type="text" required></ion-textarea>
+            </ion-item>
+            <ion-item>
+                <ion-label position="floating">Telefono</ion-label>
+                <ion-select [(ngModel)]="data.docente_id" name="docente" required>
+                    <ion-select-option *ngFor="let doc of docentes" [value]="doc.id">{{doc.nombre}}</ion-select-option>
+                </ion-select>
+            </ion-item>
+        </ion-list>
+        <ion-button expand="full" type="submit" [disabled]="formulario.invalid">
+            Crear
+        </ion-button>
+    </form>
+</ion-content>

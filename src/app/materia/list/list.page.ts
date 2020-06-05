@@ -1,29 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../services/api.service';
+import { ApiService } from 'src/app/services/api.service';
 import { AlertController, ModalController } from '@ionic/angular';
-import { Router } from '@angular/router';
-import { UpdatePage } from '../estudiante/update/update.page';
-
+import { CreatePage } from '../create/create.page';
+import { UpdatePage } from '../update/update.page';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-list',
+  templateUrl: './list.page.html',
+  styleUrls: ['./list.page.scss'],
 })
-export class HomePage implements OnInit{
+export class ListPage implements OnInit {
 
-  public estudiantes:any[] =[];
+  public materias:any[] =[];
 
   constructor(
     private api:ApiService, 
     private alert:AlertController,
-    private router: Router,
     private modal:ModalController
     ) {}
 
   ngOnInit(){
-    this.api.getResponse("estudiante","GET").subscribe((data:any) => {
-      this.estudiantes = data.data;
+    this.api.getResponse("materia","GET").subscribe((data:any) => {
+      this.materias = data.data;
     })
   }
 
@@ -34,7 +32,7 @@ export class HomePage implements OnInit{
         {
           text: "Si",
           handler: () => {
-            this.api.getResponse("estudiante/"+id, "DELETE").subscribe(() => {
+            this.api.getResponse("materia/"+id, "DELETE").subscribe(() => {
               this.presentAlert("Eliminacion exitosa");
             },() => this.presentAlert("No se dio la eliminacion"));
           }
@@ -55,7 +53,9 @@ export class HomePage implements OnInit{
   }
 
   create(){
-    this.router.navigate(["create"]);
+    this.modal.create({
+      component: CreatePage,
+    }).then(modal => modal.present());
   }
 
   update(id){

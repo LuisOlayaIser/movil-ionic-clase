@@ -4,8 +4,22 @@ import { HomePage } from './home.page';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'listEst',
     component: HomePage,
+    children: [
+      {
+        path: 'listEst',
+        loadChildren: () => import('./../estudiante/list/list.module').then( m => m.ListPageModule)
+      },
+      {
+        path: 'listMat',
+        loadChildren: () => import('./../materia/list/list.module').then( m => m.ListPageModule)
+      },
+      {
+        path: 'listDoc',
+        loadChildren: () => import('./../docente/list/list.module').then( m => m.ListPageModule)
+      },
+    ]
   }
 ];
 

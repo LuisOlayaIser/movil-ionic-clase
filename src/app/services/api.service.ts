@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ApiService {
 
-  public PATH = "http://localhost/api/";
+  public PATH = "http://apiclase.yca.com.co/api/";
 
   constructor(private http: HttpClient) { }
 

@@ -4,7 +4,11 @@ import { HomePage } from './home.page';
 
 const routes: Routes = [
   {
-    path: 'listEst',
+    path: '',
+    redirectTo: "listEst"
+  },
+  {
+    path: '',
     component: HomePage,
     children: [
       {

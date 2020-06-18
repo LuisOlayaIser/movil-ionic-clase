@@ -4,6 +4,7 @@ import { AlertController, ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { UpdatePage } from '../../estudiante/update/update.page';
 import { CreatePage } from '../create/create.page';
+import { ShowPage } from '../show/show.page';
 
 @Component({
   selector: 'app-list',
@@ -21,8 +22,12 @@ export class ListPage implements OnInit {
     ) {}
 
   ngOnInit(){
+    this.get();
+  }
+
+  get(){
     this.api.getResponse("estudiante","GET").subscribe((data:any) => {
-      this.estudiantes = data.data;
+      this.estudiantes = data.data.reverse();
     })
   }
 
@@ -62,6 +67,23 @@ export class ListPage implements OnInit {
   update(id){
     this.modal.create({
       component: UpdatePage,
+      componentProps: {
+        'id': id
+      }
+    }).then(modal => modal.present());
+  }
+
+  doRefresh(event) {
+
+    setTimeout(() => {
+      this.get();
+      event.target.complete();
+    }, 2000);
+  }
+
+  show(id){
+    this.modal.create({
+      component: ShowPage,
       componentProps: {
         'id': id
       }

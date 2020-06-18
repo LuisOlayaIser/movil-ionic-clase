@@ -3,30 +3,42 @@
         <ion-title>
             Estudiantes
         </ion-title>
-        <ion-button (click)="create()" slot="end">
+        <ion-button (click)="create()" slot="end" fill="none">
             <ion-icon name="add-circle-outline"></ion-icon>Crear
         </ion-button>
     </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
     <h1>Listado de estudiantes</h1>
     <ion-list>
-        <ion-item *ngFor="let estudiante of estudiantes">
-            <ion-label>
-                <ion-label>{{estudiante.nombre}} {{estudiante.apellido}}</ion-label>
-                <p>{{estudiante.email}}</p>
-                <p>{{estudiante.telefono}}</p>
-            </ion-label>
+        <ion-item-sliding *ngFor="let estudiante of estudiantes">
+            <ion-item-options side="start">
+                <ion-item-option color="danger" (click)="eliminar(estudiante.id)">
+                    <ion-icon name="trash-outline"></ion-icon>
+                </ion-item-option>
+                <ion-item-option color="warning" (click)="update(estudiante.id)">
+                    <ion-icon name="reload-outline"></ion-icon>
+                </ion-item-option>
+            </ion-item-options>
+            <ion-item>
+                <ion-label>
+                    <ion-label>{{estudiante.nombre}} {{estudiante.apellido}}</ion-label>
+                    <p>{{estudiante.email}}</p>
+                    <p>{{estudiante.telefono}}</p>
+                </ion-label>
+            </ion-item>
 
-            <ion-buttons slot="end">
-                <ion-button (click)="eliminar(estudiante.id)">
-                    Eliminar
-                </ion-button>
-                <ion-button (click)="update(estudiante.id)">
-                    Actualizar
-                </ion-button>
-            </ion-buttons>
-        </ion-item>
+            <ion-item-options side="end">
+                <ion-item-option color="primary" (click)="show(estudiante.id)">
+                    <ion-icon name="folder-outline"></ion-icon>
+                </ion-item-option>
+            </ion-item-options>
+            <!--  -->
+        </ion-item-sliding>
+
     </ion-list>
 </ion-content>

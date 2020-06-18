@@ -1,0 +1,42 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Estudiante</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="closeModal()" fill="none">
+                cerrar
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card>
+        <ion-card-content>
+            <p>Nombre: {{estudiante.nombre}}</p>
+            <p>Apellido: {{estudiante.apellido}}</p>
+            <p>Telefono: {{estudiante.telefono}}</p>
+            <p>Correo Electronico{{estudiante.email}}</p>
+            <br>
+            <table borde="1">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Creditos</th>
+                        <th>Horas</th>
+                        <th>Descripcion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let materia of materias">
+                        <td>{{materia.nombre}}</td>
+                        <td>{{materia.creditos}}</td>
+                        <td>{{materia.horas}}</td>
+                        <td>{{materia.email}}</td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </ion-card-content>
+    </ion-card>
+
+</ion-content>

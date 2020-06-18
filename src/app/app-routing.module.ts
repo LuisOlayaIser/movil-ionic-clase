@@ -27,6 +27,18 @@ const routes: Routes = [
     path: 'update',
     loadChildren: () => import('./materia/update/update.module').then( m => m.UpdatePageModule)
   },
+  {
+    path: 'create',
+    loadChildren: () => import('./docente/create/create.module').then( m => m.CreatePageModule)
+  },
+  {
+    path: 'update',
+    loadChildren: () => import('./docente/update/update.module').then( m => m.UpdatePageModule)
+  },
+  {
+    path: 'show',
+    loadChildren: () => import('./estudiante/show/show.module').then( m => m.ShowPageModule)
+  },
   
 ];
 

@@ -25,6 +25,7 @@ export class UpdatePage implements OnInit {
     ) { }
 
   ngOnInit() {
+
     let id = this.navParam.get('id');
     this.api.getResponse("estudiante/"+id,"GET").subscribe((res:any) => {
       this.estudiante = res.data;
